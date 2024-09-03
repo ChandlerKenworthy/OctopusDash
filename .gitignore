@@ -1,0 +1,11 @@
+# Hide secrets
+*.key
+
+# macOS
+.DS_Store
+
+# Raw database
+*.db
+
+# Cache
+__pycache__

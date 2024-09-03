@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Prices Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="nav-wrapper">
+                <h1>Dashboard</h1>
+                <div class="nav">
+                    <h3>Menu</h3>
+                    <div class="link-item" id="active" >
+                        <ion-icon name="grid-outline"></ion-icon>
+                        <a href="#">Overview</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                        <a href="#">Statistics</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="cog-outline"></ion-icon>
+                        <a href="#">Settings</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        <a href="#">Logs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-wrapper">
+                <div class="icon"></div>
+                <div class="details">
+                    <p class="name">Chandler Kenworthy</p>
+                    <p class="email">joebloggs@example.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <header>
+                <h1>Welcome, Chandler</h1>
+            </header>
+            <div class="content-wrapper">
+                <h2>Dashboard</h2>
+                <p>Easily manage and view your current data.</p>
+                <p>Most recent pricing data from {{ most_recent_data_fetch_date }} says {{ current_price }} p/kWh</p>
+                <!-- Button to Fetch More Data -->
+                <button id="fetchDataButton">Fetch More Data</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="/static/scripts/buttonActions.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+
+<!--
+
+<h1>Top 5 Energy Prices</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Period Start</th>
+                <th>Period End</th>
+                <th>Price (pence/kWh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+-->
