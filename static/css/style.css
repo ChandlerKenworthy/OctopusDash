@@ -62,7 +62,7 @@ a, a:link {
 }
 
 .menu .nav .link-item ion-icon {
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 .menu .nav .link-item a,
@@ -71,7 +71,7 @@ a, a:link {
 }
 
 .menu .nav .link-item#active {
-    border-left: 5px solid #B7DD55;
+    border-left: 3px solid #B7DD55;
 }
 
 .menu .nav .link-item#active a {
@@ -80,6 +80,7 @@ a, a:link {
 
 .menu .nav .link-item#active ion-icon {
     color: #B7DD55;
+    margin-left: -3px;
 }
 
 .user-wrapper {
@@ -114,9 +115,44 @@ a, a:link {
 
 .content header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px;
     width: 100%;
     border-bottom: 1px solid #E0E0E0;
+}
+
+header .search-field-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+header .search-field {
+    width: 300px;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+}
+
+header .search-field p {
+    color: #707070;
+}
+
+header .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+}
+
+header .icons ion-icon {
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 50%;
 }
 
 .content header h1 {
@@ -128,13 +164,119 @@ a, a:link {
     padding: 20px;
 }
 
-.content-wrapper h2 {
+.content-wrapper .header h2 {
     font-size: 1.5rem;
     font-weight: 400;
 }
 
-.content-wrapper p {
+.content-wrapper .header p {
     color: #707070;
+    font-size: 0.75rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.cards {
+    margin: 30px 0;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    transition: all .2s ease-in;
+}
+
+.card:hover {
+    -webkit-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.card .name {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.card .data {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.card .data span.units {
+    color: #707070;
+    font-size: 0.75rem;
+    margin-left: 5px;
+}
+
+.card .title-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .title-wrapper ion-icon {
+    margin-right: 5px;
+}
+
+.card .title {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card .title p {
+    font-size: 0.75rem;
+    color: #707070;
+}
+
+.card .change-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card .change-data ion-icon {
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+.card .change {
+    font-size: 1rem;
+}
+
+.card .change-data#success ion-icon {
+    color: #6DBE5B;
+}
+
+.success {
+    color: #6DBE5B;
+}
+
+.failure {
+    color: #DB3D32;
+}
+
+.card .change-data#failure ion-icon {
+    color: #DB3D32;
 }
 
 button {

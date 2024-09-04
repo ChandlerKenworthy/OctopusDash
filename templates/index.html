@@ -41,6 +41,10 @@
                         <a href="#">Statistics</a>
                     </div>
                     <div class="link-item">
+                        <ion-icon name="cloud-outline"></ion-icon>
+                        <a href="#">Weather</a>
+                    </div>
+                    <div class="link-item">
                         <ion-icon name="cog-outline"></ion-icon>
                         <a href="#">Settings</a>
                     </div>
@@ -61,13 +65,85 @@
         <div class="content">
             <header>
                 <h1>Welcome, Chandler</h1>
+                <div class="search-field-wrapper">
+                    <div class="search-field">
+                        <p>Search...</p>
+                        <ion-icon name="search-outline"></ion-icon>
+                    </div>
+                    <div class="icons">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </div>
+                </div>
             </header>
             <div class="content-wrapper">
-                <h2>Dashboard</h2>
-                <p>Easily manage and view your current data.</p>
-                <p>Most recent pricing data from {{ most_recent_data_fetch_date }} says {{ current_price }} p/kWh</p>
+                <div class="header">
+                    <h2>Dashboard</h2>
+                    <p>Easily manage and view your current data.</p>
+                </div>
+                <div class="row cards">
+                    <div class="card">
+                        <div class="title">
+                            <div class="title-wrapper">
+                                <ion-icon name="flash-outline"></ion-icon>
+                                <h4 class="name">Electricity</h4>
+                            </div>
+                            <p>Last Updated: {{ most_recent_data_fetch_date }}</p>
+                        </div>
+                        <p class="data">{{ current_price }}<span class="units">p/kWh</span></p>
+                        <div class="change-data" id="failure">
+                            <ion-icon name="trending-up-outline"></ion-icon>
+                            <p class="change"><span class="failure">{{ curr_price_pct_change_week }}%</span> from last week</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="title">
+                            <div class="title-wrapper">
+                                <ion-icon name="flash-outline"></ion-icon>
+                                <h4 class="name">Usage</h4>
+                            </div>
+                            <p>{{ usage_start }} - {{ usage_end }}</p>
+                        </div>
+                        <p class="data">{{ curr_usage }}<span class="units">kWh</span></p>
+                        <div class="change-data" id="success">
+                            <ion-icon name="trending-up-outline"></ion-icon>
+                            <p class="change"><span class="success">-15.0%</span> compared to usual</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="title">
+                            <div class="title-wrapper">
+                                <ion-icon name="wifi-outline"></ion-icon>
+                                <h4 class="name">WiFi</h4>
+                            </div>
+                            <p>Last Updated: {{ most_recent_data_fetch_date }}</p>
+                        </div>
+                        <p class="data">62.4<span class="units">Mbps</span></p>
+                        <div class="change-data" id="failure">
+                            <ion-icon name="arrow-down-outline"></ion-icon>
+                            <p class="change"><span class="failure">BAD</span> Slower than usual</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="title">
+                            <div class="title-wrapper">
+                                <ion-icon name="server-outline"></ion-icon>
+                                <h4 class="name">Storage</h4>
+                            </div>
+                            <p>Last Updated: Now</p>
+                        </div>
+                        <p class="data">42.5<span class="units">%</span></p>
+                        <div class="change-data">
+                            <p class="change"><span>14,937</span> total files</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Button to Fetch More Data -->
-                <button id="fetchDataButton">Fetch More Data</button>
+                <button id="fetchDataButton">Fetch Pricing Data</button>
+                <button id="fetchUsageButton">Fetch Usage Data</button>
             </div>
         </div>
     </div>
