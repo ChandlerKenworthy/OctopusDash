@@ -8,22 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -140,6 +125,11 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <canvas id="linechart" width="900" height="400"></canvas>
+                </div>
+
                 
                 <!-- Button to Fetch More Data -->
                 <button id="fetchDataButton">Fetch Pricing Data</button>
@@ -147,34 +137,38 @@
             </div>
         </div>
     </div>
-    
-    
+
     <script type="text/javascript" src="/static/scripts/buttonActions.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        const ctx = document.getElementById('linechart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: {{ last_week_dates | safe }},
+            datasets: [
+                {
+                    label: 'Last Week Usage (kWh)',
+                    data: {{ last_week_usage | safe }},
+                    borderWidth: 1,
+                    backgroundColor: "rgba(182, 221, 85, 1)",
+                    borderColor: "rgba(0,0,0,0)"
+                },
+                {
+                    label: 'Average Usage (kWh)',
+                    data: {{ usage_avg | safe }},
+                    borderWidth: 1,
+                    backgroundColor: "rgba(11, 33, 20, 1)",
+                    borderColor: "rgba(0,0,0,0)"
+                },
+            ]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    </script>
 </body>
 </html>
-
-<!--
-
-<h1>Top 5 Energy Prices</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Period Start</th>
-                <th>Period End</th>
-                <th>Price (pence/kWh)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in records %}
-                <tr>
-                    <td>{{ record[0] }}</td>
-                    <td>{{ record[1] }}</td>
-                    <td>{{ record[2] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
--->

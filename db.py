@@ -28,7 +28,7 @@ def get_curr_price_percentage_change(curr_price):
     pct_change = 100.0 * ((curr_price - records[0][0]) / records[0][0])
     symbol = "+"
     if pct_change < 0:
-        symbol = "-"
+        symbol = ""
 
     conn.close()
     return f"{symbol}{pct_change:.1f}"
