@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Prices Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="nav-wrapper">
+                <h1>Dashboard</h1>
+                <div class="nav">
+                    <h3>Menu</h3>
+                    <div class="link-item">
+                        <ion-icon name="grid-outline"></ion-icon>
+                        <a href="{{ url_for('index') }}">Overview</a>
+                    </div>
+                    <div class="link-item" id="active">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                        <a href="/statistics">Statistics</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="cloud-outline"></ion-icon>
+                        <a href="#">Weather</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="cog-outline"></ion-icon>
+                        <a href="#">Settings</a>
+                    </div>
+                    <div class="link-item">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        <a href="#">Logs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-wrapper">
+                <div class="icon"></div>
+                <div class="details">
+                    <p class="name">Chandler Kenworthy</p>
+                    <p class="email">joebloggs@example.com</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="statistics-content">
+            <div class="row">
+                <canvas id="day_of_week_bar" width="900" height="400"></canvas>
+            </div>
+            <div class="row">
+                <canvas id="last_day_line" width="900" height="400"></canvas>
+            </div>
+        </div>
+
+    <script type="text/javascript" src="/static/scripts/buttonActions.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        const ctxldl = document.getElementById('last_day_line');
+
+        new Chart(ctxldl, {
+            type: 'line',
+            data: {
+                labels: {{ last_hour_labels | safe }},
+                datasets: [
+                    {
+                        label: 'Todays Usage (kWh)',
+                        data: {{ hourly_usage | safe }},
+                        borderColor: 'rgba(11, 33, 20, 1)',
+                        backgroundColor: "rgba(182, 221, 85, 1)",
+                        yAxisID: 'y-axis-1'
+                    },
+                    {
+                        label: 'Todays Prices (p/kWh)',
+                        data: {{ hourly_pricing | safe }},
+                        borderColor: 'rgba(182, 221, 85, 1)',
+                        backgroundColor: "rgba(11, 33, 20, 1)",
+                        yAxisID: 'y-axis-2'
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1', // First y-axis
+                            type: 'linear',
+                            position: 'left',
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Usage (kWh)'
+                            }
+                        },
+                        {
+                            id: 'y-axis-2', // Second y-axis
+                            type: 'linear',
+                            position: 'right',
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Price (p/kWh)'
+                            },
+                            gridLines: {
+                                drawOnChartArea: false // Ensures the grid lines don’t overlap with the first y-axis
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+    <script>
+        const ctx = document.getElementById('day_of_week_bar');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: {{ last_week_dates | safe }},
+            datasets: [
+                {
+                    label: 'Last Week Usage (kWh)',
+                    data: {{ last_week_usage | safe }},
+                    borderWidth: 1,
+                    backgroundColor: "rgba(182, 221, 85, 1)",
+                    borderColor: "rgba(0,0,0,0)"
+                },
+                {
+                    label: 'Average Usage (kWh)',
+                    data: {{ usage_avg | safe }},
+                    borderWidth: 1,
+                    backgroundColor: "rgba(11, 33, 20, 1)",
+                    borderColor: "rgba(0,0,0,0)"
+                },
+            ]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    </script>
+</body>
+</html>

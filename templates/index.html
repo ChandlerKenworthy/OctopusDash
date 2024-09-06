@@ -17,13 +17,13 @@
                 <h1>Dashboard</h1>
                 <div class="nav">
                     <h3>Menu</h3>
-                    <div class="link-item" id="active" >
+                    <div class="link-item" id="active">
                         <ion-icon name="grid-outline"></ion-icon>
-                        <a href="#">Overview</a>
+                        <a href="{{ url_for('index') }}">Overview</a>
                     </div>
                     <div class="link-item">
                         <ion-icon name="bar-chart-outline"></ion-icon>
-                        <a href="#">Statistics</a>
+                        <a href="/statistics">Statistics</a>
                     </div>
                     <div class="link-item">
                         <ion-icon name="cloud-outline"></ion-icon>
@@ -61,79 +61,85 @@
                 </div>
             </header>
             <div class="content-wrapper">
-                <div class="header">
-                    <h2>Dashboard</h2>
-                    <p>Easily manage and view your current data.</p>
+                <div class="main-content">
+                    <div class="row">
+                        <div class="header">
+                            <h2>Dashboard</h2>
+                            <p>Easily manage and view your current data.</p>
+                        </div>
+                    </div>
+                    <div class="row cards">
+                        <div class="card">
+                            <div class="title">
+                                <div class="title-wrapper">
+                                    <ion-icon name="flash-outline"></ion-icon>
+                                    <h4 class="name">Electricity</h4>
+                                </div>
+                                <p>{{ most_recent_data_fetch_date }}</p>
+                            </div>
+                            <p class="data">{{ current_price }}<span class="units">p/kWh</span></p>
+                            <div class="change-data" id="failure">
+                                <ion-icon name="trending-up-outline"></ion-icon>
+                                <p class="change"><span class="failure">{{ curr_price_pct_change_week }}%</span> from last week</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="title">
+                                <div class="title-wrapper">
+                                    <ion-icon name="flash-outline"></ion-icon>
+                                    <h4 class="name">Usage</h4>
+                                </div>
+                                <p>{{ usage_start }} - {{ usage_end }}</p>
+                            </div>
+                            <p class="data">{{ curr_usage }}<span class="units">kWh</span></p>
+                            <div class="change-data" id="success">
+                                <ion-icon name="trending-up-outline"></ion-icon>
+                                <p class="change"><span class="success">-15.0%</span> compared to usual</p>
+                            </div>
+                        </div>
+    
+                        <div class="card">
+                            <div class="title">
+                                <div class="title-wrapper">
+                                    <ion-icon name="wifi-outline"></ion-icon>
+                                    <h4 class="name">WiFi</h4>
+                                </div>
+                                <p>{{ most_recent_data_fetch_date }}</p>
+                            </div>
+                            <p class="data">62.4<span class="units">Mbps</span></p>
+                            <div class="change-data" id="failure">
+                                <ion-icon name="arrow-down-outline"></ion-icon>
+                                <p class="change"><span class="failure">BAD</span> Slower than usual</p>
+                            </div>
+                        </div>
+    
+                        <div class="card">
+                            <div class="title">
+                                <div class="title-wrapper">
+                                    <ion-icon name="server-outline"></ion-icon>
+                                    <h4 class="name">Storage</h4>
+                                </div>
+                                <p>Now</p>
+                            </div>
+                            <p class="data">42.5<span class="units">%</span></p>
+                            <div class="change-data">
+                                <p class="change"><span>14,937</span> total files</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h3>Some more content in a row</h3>
+                    </div>
                 </div>
-                <div class="row cards">
-                    <div class="card">
-                        <div class="title">
-                            <div class="title-wrapper">
-                                <ion-icon name="flash-outline"></ion-icon>
-                                <h4 class="name">Electricity</h4>
-                            </div>
-                            <p>Last Updated: {{ most_recent_data_fetch_date }}</p>
-                        </div>
-                        <p class="data">{{ current_price }}<span class="units">p/kWh</span></p>
-                        <div class="change-data" id="failure">
-                            <ion-icon name="trending-up-outline"></ion-icon>
-                            <p class="change"><span class="failure">{{ curr_price_pct_change_week }}%</span> from last week</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="title">
-                            <div class="title-wrapper">
-                                <ion-icon name="flash-outline"></ion-icon>
-                                <h4 class="name">Usage</h4>
-                            </div>
-                            <p>{{ usage_start }} - {{ usage_end }}</p>
-                        </div>
-                        <p class="data">{{ curr_usage }}<span class="units">kWh</span></p>
-                        <div class="change-data" id="success">
-                            <ion-icon name="trending-up-outline"></ion-icon>
-                            <p class="change"><span class="success">-15.0%</span> compared to usual</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="title">
-                            <div class="title-wrapper">
-                                <ion-icon name="wifi-outline"></ion-icon>
-                                <h4 class="name">WiFi</h4>
-                            </div>
-                            <p>Last Updated: {{ most_recent_data_fetch_date }}</p>
-                        </div>
-                        <p class="data">62.4<span class="units">Mbps</span></p>
-                        <div class="change-data" id="failure">
-                            <ion-icon name="arrow-down-outline"></ion-icon>
-                            <p class="change"><span class="failure">BAD</span> Slower than usual</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="title">
-                            <div class="title-wrapper">
-                                <ion-icon name="server-outline"></ion-icon>
-                                <h4 class="name">Storage</h4>
-                            </div>
-                            <p>Last Updated: Now</p>
-                        </div>
-                        <p class="data">42.5<span class="units">%</span></p>
-                        <div class="change-data">
-                            <p class="change"><span>14,937</span> total files</p>
-                        </div>
+                <div class="sidebar">
+                    <div class="action-btns-wrapper">
+                        <h3>Quick Actions</h3>
+                        <button id="fetchDataButton">Fetch Pricing Data</button>
+                        <button id="fetchUsageButton">Fetch Usage Data</button>
                     </div>
                 </div>
-
-                <div class="row">
-                    <canvas id="linechart" width="900" height="400"></canvas>
-                </div>
-
-                
-                <!-- Button to Fetch More Data -->
-                <button id="fetchDataButton">Fetch Pricing Data</button>
-                <button id="fetchUsageButton">Fetch Usage Data</button>
             </div>
         </div>
     </div>
@@ -141,34 +147,5 @@
     <script type="text/javascript" src="/static/scripts/buttonActions.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script>
-        const ctx = document.getElementById('linechart');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-            labels: {{ last_week_dates | safe }},
-            datasets: [
-                {
-                    label: 'Last Week Usage (kWh)',
-                    data: {{ last_week_usage | safe }},
-                    borderWidth: 1,
-                    backgroundColor: "rgba(182, 221, 85, 1)",
-                    borderColor: "rgba(0,0,0,0)"
-                },
-                {
-                    label: 'Average Usage (kWh)',
-                    data: {{ usage_avg | safe }},
-                    borderWidth: 1,
-                    backgroundColor: "rgba(11, 33, 20, 1)",
-                    borderColor: "rgba(0,0,0,0)"
-                },
-            ]
-            },
-            options: {
-                responsive: false
-            }
-        });
-    </script>
 </body>
 </html>

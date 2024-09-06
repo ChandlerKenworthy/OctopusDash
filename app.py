@@ -2,7 +2,8 @@ from flask import Flask, render_template, jsonify
 from db import get_top_records, fetch_electricity_pricing, get_most_recent_price, get_curr_price_percentage_change, fetch_electricity_usage
 from datetime import datetime, timedelta
 from dateutil import parser
-from usage import get_curr_usage, get_last_week_usage, get_average_usage
+from pricing import get_last_day_pricing_by_hour
+from usage import get_curr_usage, get_last_week_usage, get_average_usage, get_last_day_usage_by_hour
 
 app = Flask(__name__)
 
@@ -13,8 +14,6 @@ def index():
     curr_info = get_most_recent_price()
     curr_usage_info = get_curr_usage()
     curr_price_change = get_curr_price_percentage_change(curr_info[2])
-    last_week_dates, last_week_usage = get_last_week_usage()
-    days_avg, usage_avg = get_average_usage()
 
     # Reformat the datetime object to the desired format
     most_recent_datetime = datetime.strptime(curr_info[1], "%Y-%m-%d %H:%M:%S").strftime("%d/%m %H:%M")
@@ -28,10 +27,6 @@ def index():
         usage_end=parser.parse(curr_usage_info[2]).strftime("%d/%m %H:%M"),
         curr_price_pct_change_week=curr_price_change,
         most_recent_data_fetch_date=most_recent_datetime,
-        last_week_dates=last_week_dates,
-        last_week_usage=last_week_usage,
-        days_avg=days_avg,
-        usage_avg=usage_avg
     )
 
 @app.route('/get_more_data', methods=['POST'])
@@ -60,6 +55,24 @@ def get_usage_data():
     except Exception as e:
         print(f"Error fetching more data: {e}")
         return jsonify({"success": False}), 500
+
+@app.route('/statistics')
+def statistics():
+    last_week_dates, last_week_usage = get_last_week_usage()
+    days_avg, usage_avg = get_average_usage()
+    last_hour_labels, hourly_usage = get_last_day_usage_by_hour()
+    hourly_pricing = get_last_day_pricing_by_hour()
+
+    return render_template(
+        'statistics.html',
+        last_week_dates=last_week_dates,
+        last_week_usage=last_week_usage,
+        days_avg=days_avg,
+        usage_avg=usage_avg,
+        last_hour_labels=last_hour_labels,
+        hourly_usage=hourly_usage,
+        hourly_pricing=hourly_pricing
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

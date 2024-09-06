@@ -84,3 +84,27 @@ def get_average_usage():
                 y.append(record[1])
 
     return X, y
+
+def get_last_day_usage_by_hour():
+    conn = sqlite3.connect("energy_data.db")
+    cursor = conn.cursor()
+
+    one_day_before = datetime.utcnow() - timedelta(days=2)
+
+    cursor.execute('''
+        SELECT strftime('%Y-%m-%d %H:00', period_start) as hourly_period, SUM(usage)
+        FROM electricity_usage
+        GROUP BY hourly_period
+        ORDER BY hourly_period DESC
+        LIMIT 24
+    ''')
+
+    records = cursor.fetchall()
+
+    hourly_usage = [r[1] for r in records]
+    timestamp_str = [parser.parse(r[0]).strftime('%d %H:00') for r in records]
+
+    print(records)
+    conn.close()
+
+    return timestamp_str[::-1], hourly_usage[::-1]

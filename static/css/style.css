@@ -161,6 +161,11 @@ header .icons ion-icon {
 }
 
 .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
     padding: 20px;
 }
 
@@ -179,10 +184,6 @@ header .icons ion-icon {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-}
-
-.cards {
-    margin: 30px 0;
 }
 
 .card {
@@ -279,12 +280,54 @@ header .icons ion-icon {
     color: #DB3D32;
 }
 
-button {
-    margin-top: 15px;
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 3;
+}
+
+.sidebar {
+    flex-grow: 2;
+}
+
+.sidebar .action-btns-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding: 20px 10px;
+    gap: 10px;
+}
+
+.sidebar .action-btns-wrapper h3 {
+    font-weight: 300;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.action-btns-wrapper button {
+    width: 100%;
     outline: none;
     padding: 15px 10px;
-    background: transparent;
-    border: 1px solid #0B2114;
-    color: #0B2114;
+    background: #0B2114;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
     cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+.action-btns-wrapper button:hover {
+    background: #B7DD55;
+}
+
+/* Statistics Route */
+.statistics-content {
+    padding: 20px;
+    height: 100%;
+    width: 100%;
 }
