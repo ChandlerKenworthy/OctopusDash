@@ -130,7 +130,8 @@
                     </div>
 
                     <div class="row">
-                        <h3>Some more content in a row</h3>
+                        <h2>Next Predicted Price: {{ hour_ahead_pred[1] }} p/kWh then {{ hour_ahead_pred[0] }}</h2>
+                        <canvas id="model_predictions" width="900" height="400"></canvas>
                     </div>
                 </div>
                 <div class="sidebar">
@@ -138,6 +139,7 @@
                         <h3>Quick Actions</h3>
                         <button id="fetchDataButton">Fetch Pricing Data</button>
                         <button id="fetchUsageButton">Fetch Usage Data</button>
+                        <button id="makePricePrediction">Predict Prices</button>
                     </div>
                 </div>
             </div>
@@ -147,5 +149,31 @@
     <script type="text/javascript" src="/static/scripts/buttonActions.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        const ctxPreds = document.getElementById('model_predictions').getContext('2d');
+
+        new Chart(ctxPreds, {
+            type: 'line',
+            data: {
+                labels: {{ true_model_dates | safe }},
+                datasets: [
+                    {
+                        label: 'True Price (p/kWh)',
+                        data: {{ true_model_prices | safe }},
+                        borderColor: 'rgba(11, 33, 20, 1)',
+                        backgroundColor: "rgba(182, 221, 85, 1)", 
+                    },
+                    {
+                        label: 'Predicted Price (p/kWh)',
+                        data: {{ pred_values | safe }},
+                        borderColor: 'rgb(30, 83, 117)',
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+            }
+        });
+    </script>
 </body>
 </html>

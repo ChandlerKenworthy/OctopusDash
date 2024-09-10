@@ -84,7 +84,6 @@ def fetch_electricity_usage(start_date=None, end_date=None):
 
     next_url = url
     while next_url:
-
         # Send the request
         response = requests.get(next_url, auth=(API_KEY, ''))
         response.raise_for_status()  # Raise an exception for HTTP errors

@@ -10,11 +10,12 @@ def get_curr_usage():
         SELECT usage, period_start, period_end
         FROM electricity_usage
         ORDER BY period_start DESC
-        LIMIT 1
+        LIMIT 10
     ''')
 
     records = cursor.fetchall()
     conn.close()
+
     return records[0]
 
 def get_last_week_usage():
@@ -104,7 +105,6 @@ def get_last_day_usage_by_hour():
     hourly_usage = [r[1] for r in records]
     timestamp_str = [parser.parse(r[0]).strftime('%d %H:00') for r in records]
 
-    print(records)
     conn.close()
 
     return timestamp_str[::-1], hourly_usage[::-1]
