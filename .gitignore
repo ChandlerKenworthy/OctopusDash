@@ -9,3 +9,7 @@
 
 # Cache
 __pycache__
+
+# Model files
+*.keras
+*.pt
