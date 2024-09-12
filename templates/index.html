@@ -129,9 +129,11 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <h2>Next Predicted Price: {{ hour_ahead_pred[1] }} p/kWh then {{ hour_ahead_pred[0] }}</h2>
-                        <canvas id="model_predictions" width="900" height="400"></canvas>
+                    <div class="col">
+                        <div class="row">
+                            <h4>Next Predicted Price: {{ hour_ahead_pred[1] }} p/kWh then {{ hour_ahead_pred[0] }} p/kWh</h4>
+                        </div>
+                        <canvas id="model_predictions" width="900" height="350"></canvas>
                     </div>
                 </div>
                 <div class="sidebar">

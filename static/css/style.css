@@ -186,6 +186,14 @@ header .icons ion-icon {
     gap: 20px;
 }
 
+.col {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
 .card {
     display: flex;
     justify-content: space-between;
@@ -285,10 +293,12 @@ header .icons ion-icon {
     flex-direction: column;
     gap: 20px;
     flex-grow: 3;
+    flex-basis: 1;
 }
 
 .sidebar {
     flex-grow: 2;
+    flex-basis: 1;
 }
 
 .sidebar .action-btns-wrapper {

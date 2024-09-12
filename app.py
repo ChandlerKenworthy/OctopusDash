@@ -31,10 +31,10 @@ def index():
         usage_end=parser.parse(curr_usage_info[2]).strftime("%d/%m %H:%M"),
         curr_price_pct_change_week=curr_price_change,
         most_recent_data_fetch_date=most_recent_datetime,
-        pred_values=model_preds[2:], # TODO: Values not lining up correctly!!!!!!
-        true_model_prices=truth_prices,
+        pred_values=model_preds,
+        true_model_prices=truth_prices[:-2],
         true_model_dates=truth_dates,
-        hour_ahead_pred=model_preds[0:2]
+        hour_ahead_pred=[f"{x:.2f}" for x in model_preds[-2:][::-1]]
     )
 
 @app.route('/get_more_data', methods=['POST'])

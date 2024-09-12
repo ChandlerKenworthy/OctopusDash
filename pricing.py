@@ -149,6 +149,7 @@ def get_predictions_from_latest():
         last_date += interval_duration
         new_date_str = last_date.strftime("%d-%m-%Y %H:%M")
         truth_dates.append(new_date_str)
+        truth_prices.append(0.0)
 
     # Predictions is currently quite long, preds[0] is the most recent prediction and preds[1]
     # the next most recent prediction
